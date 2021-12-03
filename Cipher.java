@@ -8,7 +8,7 @@ import java.lang.String;
 import java.lang.StringBuilder;
 
 public class Cipher {
-    public static String normalize(String naturalText){
+    public static String normalized(String naturalText){
         String normalizado=new String();
         //Remover acentos e cedilhas 
         normalizado=Normalizer.normalize(naturalText,Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]","");
@@ -22,7 +22,7 @@ public class Cipher {
     }
 
     public static String encode(String plaintText,int cols){
-        plaintText=normalize(plaintText);
+        plaintText=normalized(plaintText);
     //calcular o tamanho necessario para a cifra
     int cipherLength=0;
     String result=new String();
