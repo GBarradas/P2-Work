@@ -75,7 +75,7 @@ public class Cipher {
        return cipher.toString();
     }
     public static void main(String[] Args){
-        System.out.println(normalized("Hoje vamos ao cinema, ou passear no jardim?"));
+        System.out.println(encode("hauooopjjcaaeisrvnsdaeeimmamoarasons",11));
     }
     
     
