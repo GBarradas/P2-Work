@@ -75,7 +75,7 @@ public class Cipher {
         divisor.add(x); 
         return divisor;
     }
-
+ 
     
     
     

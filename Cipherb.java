@@ -7,7 +7,7 @@ import java.text.Normalizer;
 import java.lang.String;
 import java.lang.StringBuilder;
 
-public class Cipherb {
+public class Cipherb { 
     public static String normalize(String naturalText){
         String normalizado=new String();
         //Remover acentos e cedilhas 
