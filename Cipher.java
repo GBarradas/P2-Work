@@ -25,24 +25,42 @@ public class Cipher {
         plaintText=normalized(plaintText);
     //calcular o tamanho necessario para a cifra
     int cipherLength=0;
-    String result=new String();
+    int linhas=0;
+    String result=plaintText;
+    StringBuilder cipher=new StringBuilder();
     for(int i=1;cipherLength<plaintText.length();i++){
         cipherLength=i*cols;
+        linhas=i;
     }
-    System.out.println(cipherLength);
     //verificamos se é necessario acrescentar letras
     if(cipherLength==plaintText.length()){
-        return print(plaintText,cipherLength,cols);
+       
+
+       for (int i=0;i<linhas;i++){
+            int pos=i;
+           for(int j=0;j<cols;j++){
+               cipher.append(result.charAt(pos));
+                pos=pos+linhas;
+           }
+
+       }
+       //System.out.println(cipher);
+       return cipher.toString();
         
     }else{//acrescenta letras
         Random r=new Random();
-        result=plaintText;
         while(result.length()!=cipherLength){
             result=result+plaintText.charAt(r.nextInt(plaintText.length()));
         }
-        //print fudido
-        //int count=1;
-        return print(result,cipherLength,cols);
+        for (int i=0;i<linhas;i++){
+            int pos=i;
+           for(int j=0;j<cols;j++){
+               cipher.append(result.charAt(pos));
+                pos=pos+linhas;
+           }
+       }
+       //System.out.println(cipher);
+       return cipher.toString();
     }      
 
     }
@@ -57,26 +75,8 @@ public class Cipher {
         divisor.add(x); 
         return divisor;
     }
-    public static String print(String result,int cipherLength,int cols){
-       int linhas=cipherLength/cols;
-       StringBuilder cipher=new StringBuilder();
-       System.out.println(linhas+"c"+cols+"\n");
 
-       for (int i=0;i<linhas;i++){
-            int pos=i;
-           for(int j=0;j<cols;j++){
-               cipher.append(result.charAt(pos));
-               System.out.print(result.charAt(pos)+" ");
-                pos=pos+linhas;
-           }
-           System.out.println();
-       }
-       //System.out.println(cipher);
-       return cipher.toString();
-    }
-    public static void main(String[] Args){
-        System.out.println(encode("hauooopjjcaaeisrvnsdaeeimmamoarasons",11));
-    }
+    
     
     
 }
