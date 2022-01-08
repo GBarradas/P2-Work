@@ -15,7 +15,7 @@ public class Cipherb {
         //Remover pontuação
         normalizado=normalizado.replaceAll("\\p{Punct}", "");
         //Remover espaços
-        normalizado=normalizado.replaceAll(" ", "");
+        normalizado=normalizado.replaceAll("\\w", "");
         //por letras minusculas
         normalizado=normalizado.toLowerCase();
         return normalizado;
@@ -81,7 +81,8 @@ public class Cipherb {
        return cipher.toString();
     }
     public static void main(String[] Args){
-        System.out.println(encode("bom dia alegria",4));
+        System.out.println(encode("Olá! Bom dia, Alegria!",8));
+        System.out.println("oalaalbeogmrdiia");
     }
     
     
