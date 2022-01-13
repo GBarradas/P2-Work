@@ -4,8 +4,6 @@ import java.util.List;
 //import java.lang.Character;
 import  java.util.Random;
 
-import javax.swing.text.html.HTMLDocument.RunElement;
-
 import java.text.Normalizer;
 import java.lang.String;
 import java.lang.StringBuilder;
@@ -69,7 +67,7 @@ public class Cipher {
        //System.out.println(cipher);
        return cipher.toString();
     }      
-
+    
     }
     public static List<Integer> findDividers(int x){
         List<Integer> divisor=new ArrayList<Integer>();
@@ -82,52 +80,58 @@ public class Cipher {
         divisor.add(x); 
         return divisor;
     }
-    public static List<String> explore(String candidate, List<String> words,int size){
-        List<String> result =new ArrayList<String>();
+    public static List<String> explore(String candidate, List<String> words){
+        List<String> result =new ArrayList<>();
         for(String word : words){
             if(candidate.startsWith(word)){
                 String suffix=candidate.substring(word.length());
-                List<String> children =explore(suffix,words,size);
+                List<String> children =explore(suffix,words);
                 for(String c : children){
                     result.add(word +" "+c);
                 }
             }
         }
         if(result.isEmpty()){
-            result.add(" ");
+            result.add("");
         }
         return result;
     }
     public static List<String> breakCipher(String cipherText, List<String> words){
         List<String> result = new ArrayList<String>();
+        List<String> possible = new ArrayList<String>();
         List<String> decodedCipher= new ArrayList<String>();
         List<Integer> divisors=findDividers(cipherText.length());
+        boolean exists=false;
         for(int divisor: divisors){
             decodedCipher.add(encode(cipherText,divisor));
             //System.out.println(divisor+": "+encode(cipherText,divisor));
         }
-        //System.out.println("--"+encode(cipherText,4));
-        return explore(encode(cipherText,4),words,11);
+        for(String candidate : decodedCipher){
+            possible=explore(candidate, words);
+            //System.out.println(candidate+"\n"+result);
+            for(String a : possible){
+                for(String b : result){
+                    if(a.equals(b)) exists= true;
+                }
+                if(!exists){
+                    if(!a.isEmpty()) result.add(a);
+                }
+            }
+        }
+        return result;
     }
     public static void main(String[] Args){
-        List<String> ola = new ArrayList<String>();
-        ola.add("hoje");
-        ola.add("vamos");
-        ola.add("ao");
-        ola.add("cinema");
-        ola.add("ou");
-        ola.add("passear");
-        ola.add("no");
-        ola.add("jardim");
-        ola.add("va");
-        ola.add("mosao");
-        ola.add("he");
-        System.out.println(ola);
-        String teste="hcsmoieojnaseerevmnoaaoemojoouanspraaadaosia";
-        ola=breakCipher("hcsmoieojnaseerevmnoaaoemojoouanspraaadaosia", ola);
-        System.out.println(ola);
+        try {
+            AbstractProvider p = new TextFileProvider("submission/teste.txt"); 
+            System.out.println(p.getWords());
+            java.util.List<String> words = p.getWords();
+            if (!words.equals(java.util.List.of("a", "b"))) throw new Exception("FAIL");
+            System.out.print("PASS");
+          } catch (Exception e) {}
     }
    
+   
+    
     
     
 }
