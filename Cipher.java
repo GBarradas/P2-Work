@@ -122,7 +122,7 @@ public class Cipher {
     }
     public static void main(String[] Args){
         try {
-            AbstractProvider p = new TextFileProvider("submission/teste.txt"); 
+            AbstractProvider p = new TextFileProviderr("submission/teste.txt"); 
             System.out.println(p.getWords());
             java.util.List<String> words = p.getWords();
             if (!words.equals(java.util.List.of("a", "b"))) throw new Exception("FAIL");
